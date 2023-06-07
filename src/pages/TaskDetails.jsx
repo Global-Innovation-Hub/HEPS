@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Container, Row, Col, Button, Form, Card } from 'react-bootstrap';
+import { Container, Row, Col, Form, Card } from 'react-bootstrap';
+import Button from '@mui/material/Button';
 
 const TaskDetails = () => {
   const { id } = useParams();
@@ -32,15 +33,15 @@ const TaskDetails = () => {
           <h3>{taskDetails.title}</h3>
           <p>Description: {taskDetails.description}</p>
 
-          <Card className="mb-3" onClick={toggleExpand}>
-            <Card.Body>
-              <Card.Title  >Task Checklist</Card.Title>
-             
+          <Card className="mb-3" >
+            <Card.Body >
+              <Card.Title onClick={toggleExpand}>Task Checklist</Card.Title>
+
               {expand && (
                 <>
                   <Form.Check label="Checkbox 1" />
                   <Form.Check label="Checkbox 2" />
-                  <Form.Check label="Checkbox 3" />
+                  <Form.Check label="Checkbox a3" />
                   <Form.Check label="Checkbox 4" />
                   <Form.Check label="Checkbox 5" />
                   <Form.Check label="Checkbox 6" />
@@ -54,14 +55,14 @@ const TaskDetails = () => {
       <Row className="justify-content-end">
         <Col xs="auto">
           <Link to="/Stepperr">
-            <Button variant="primary" style={{width:"200px"}}>Need Help</Button>
+            <Button variant="outlined" sx={{ mt: 1, mr: 1, '&:hover': { color: '#blue' } }} style={{ width: "200px",fontWeight:"bold" }}>Need Help</Button>
+            <Button style={{ width: "200px",fontWeight:"bold" }} sx={{ mt: 1, mr: 1, '&:hover': { color: '#388e3c' } }} variant="outlined" color="success">
+              Save
+            </Button>
           </Link>
-        </Col>
-        <Col xs="auto">
-          <Button variant="success"  style={{width:"200px"}}>Save</Button>
-        </Col>
-        <Col xs="auto">
-          <Button variant="danger"  style={{width:"200px"}}>Cancel</Button>
+          <Link to="/tasks">
+          <Button variant="outlined" color="error" style={{ width: "200px",fontWeight:"bold" }} sx={{ mt: 1, mr: 1, '&:hover': { color: 'red' } }}>Cancel</Button>
+          </Link>
         </Col>
       </Row>
     </Container>

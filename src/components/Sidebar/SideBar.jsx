@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
-import { FcSettings } from "react-icons/fc";
+import { AiOutlineSetting } from "react-icons/ai";
 import { AiOutlineLogout } from "react-icons/ai";
-import { FcParallelTasks } from "react-icons/fc";
+import { BiTask } from "react-icons/bi";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
@@ -15,7 +15,7 @@ const routes = [
   {
     path: "/tasks",
     name: "Tasks",
-    icon: <FcParallelTasks />,
+    icon: <BiTask />,
   },
   {
     path: "/users",
@@ -25,7 +25,7 @@ const routes = [
   {
     path: "/settings",
     name: "settings",
-    icon: <FcSettings />,
+    icon: <AiOutlineSetting />,
   },
   {
     path: "/analytics",
@@ -156,32 +156,16 @@ const SideBar = ({ children }) => {
                   exit="hidden"
                   className="logo"
                 >
-                 <img src={logo} alt="logo/>" style={{height:"130px"}} />
+                  <h6 className="m-2">Human Error Prevenstion System</h6>
                 </motion.h1>
               )}
             </AnimatePresence>
-
+            {/* 
             <div className="bars">
               <FaBars onClick={toggle} />
-            </div>
+            </div> */}
           </div>
-          <div className="search">
-            <div className="search_icon">
-              <BiSearch />
-            </div>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.input
-                  initial="hidden"
-                  animate="show"
-                  exit="hidden"
-                  variants={inputAnimation}
-                  type="text"
-                  placeholder="Search"
-                />
-              )}
-            </AnimatePresence>
-          </div>
+          <hr></hr>
           <section className="routes">
             {routes.map((route, index) => {
               if (route.subRoutes) {

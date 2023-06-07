@@ -85,7 +85,7 @@ main {
   border-right: 4px solid transparent;
   transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   text-decoration: none;
-  font-size: larger;
+ 
 }
 
 .link:hover {
@@ -126,4 +126,8 @@ main {
 .menu_container .link {
   padding-left: 20px;
   border-bottom: #fff 0.5px solid;
+}
+.zoom-out-card {
+  transform: scale(0.9);
+  transition: transform 0.3s ease-in-out;
 }

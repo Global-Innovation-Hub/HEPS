@@ -1,13 +1,22 @@
-// Tasks.js
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const Tasks = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleCardMouseEnter = (taskId) => {
+    setHoveredCard(taskId);
+  };
+
+  const handleCardMouseLeave = () => {
+    setHoveredCard(null);
   };
 
   const filteredTasks = [
@@ -33,7 +42,7 @@ const Tasks = () => {
             value={searchTerm}
             onChange={handleSearch}
             className="w-100"
-            style={{ minWidth: '595px' }}
+            style={{ minWidth: '595px', height: "42px", border: "1px solid " }}
           />
         </div>
       </div>
@@ -41,9 +50,21 @@ const Tasks = () => {
         {filteredTasks.map((task) => (
           <Col key={task.id} xs={12} sm={6} md={4} lg={3} xl={3} className="mb-4">
             <Link to={`/tasks/${task.id}`} className="card-link" style={{ textDecoration: 'none' }}>
-              <Card style={{ backgroundColor: '', color: '' }}>
+              <Card
+                className={hoveredCard === task.id ? 'zoom-out-card' : ''}
+                style={{
+                  backgroundColor: hoveredCard === task.id ? '#f5f5f5' : '',
+                  color: '',
+                  boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                  transition: 'transform 0.3s',
+                  transform: hoveredCard === task.id ? 'scale(0.95)' : 'scale(1)',
+                }}
+                onMouseEnter={() => handleCardMouseEnter(task.id)}
+                onMouseLeave={handleCardMouseLeave}
+              >
                 <Card.Body>
                   <Card.Title className="text-start">{task.title}</Card.Title>
+                  <Button className="mt-4" size="small" variant="outlined" style={{ fontWeight: "bold" }}>View Checklist</Button>
                 </Card.Body>
               </Card>
             </Link>
