@@ -51,6 +51,7 @@ const TaskDetails = () => {
                       <Form.Check label="Checkbox 4" />
                       <Form.Check label="Checkbox 5" />
                       <Form.Check label="Checkbox 6" />
+                      <Form.Check label="Checkbox 7" />
                       <Form.Check label="acknowledge" />
                     </>
                   )}
