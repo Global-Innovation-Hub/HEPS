@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Row, Col, Container, Button, Form } from 'react-bootstrap';
-import logo from '../midea/GHLUIH Final Logo-01.png';
+import logo from '../media/GHLUIH Final Logo-01.png';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {

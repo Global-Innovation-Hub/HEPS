@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import SideBar from '../components/Sidebar/SideBar';
 
 const Tasks = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -30,6 +32,10 @@ const Tasks = () => {
   ].filter((task) => task.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
+    <Box sx={{ display: 'flex' }}>
+      <SideBar />
+      <Box component="main" style={{  width: '100%', alignSelf: "center", marginTop: '64px' }} sx={{ flexGrow: 1, p: 3 }}>
+
     <Container fluid>
       <div className="d-flex align-items-center flex-column mb-3">
         <h2 className="mb-0 mt-2 text-start" style={{ color: '#083c59' }}>
@@ -64,7 +70,7 @@ const Tasks = () => {
               >
                 <Card.Body>
                   <Card.Title className="text-start">{task.title}</Card.Title>
-                  <Button className="mt-4" size="small" variant="outlined" style={{ fontWeight: "bold" }}>View Checklist</Button>
+                  {/* <Button className="mt-4" size="small" variant="outlined" style={{ fontWeight: "bold" }}>View Checklist</Button> */}
                 </Card.Body>
               </Card>
             </Link>
@@ -72,6 +78,8 @@ const Tasks = () => {
         ))}
       </Row>
     </Container>
+    </Box>
+    </Box>
   );
 };
 

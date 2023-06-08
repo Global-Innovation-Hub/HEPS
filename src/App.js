@@ -20,11 +20,10 @@ function App() {
       <Routes>
       <Route path="/" element={<Login />} />
       </Routes>
-      <SideBar>
+      {/* <SideBar> */}
         <Routes>
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/users" element={<Users />} />
-          
           <Route path="/messages" element={<Messages />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/file-manager" element={<FileManager />} />
@@ -32,9 +31,11 @@ function App() {
           <Route path="/saved" element={<Saved />} />
           <Route path="/Stepperr" element={<Stepperr />} />
           <Route path="/tasks/:id" element={<TaskDetails/>} />
+          {/* <Route path="/Side" element={<Side/>} /> */}
           <Route path="*" element={<> not found</>} />
+
         </Routes>
-      </SideBar>
+      {/* </SideBar> */}
     </Router>
   );
 }

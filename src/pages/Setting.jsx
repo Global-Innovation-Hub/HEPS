@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
@@ -18,8 +20,43 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import Sidebar from '../components/Sidebar/SideBar';
 // import 'react-youtube/dist/ReactYouTube.css';
 
+
+
+const steps = [
+  {
+    label: 'Documentation',
+    text: `
+  <Row>
+  <h2 style={{ color: '#083c59', fontWeight: '700', lineHeight: '1.2' }}>Documentation</h2> 
+  <a href="https://www.health.state.mn.us/people/immunize/hcp/admim.pdf" onClick={handleOpen}>Click here for the document</a>
+  </Row>
+`,
+    icon: 1,
+  },
+  {
+    label: 'Reference Video',
+    text: `
+  <Row>
+  <h2 style={{ color: '#083c59', fontWeight: '700', lineHeight: '1.2' }}>Reference Video</h2> 
+  <a href="https://www.youtube.com/watch?v=YoEWudfhtsk" onClick={handleOpen}>Click here to watch the video</a>
+  </Row>
+`,
+    icon: 2,
+  },
+  {
+    label: 'Chat',
+    text: 'This is the chat step. Start a chat <a href="https://example.com/chat" target="_blank">here</a>.',
+    icon: 3,
+  },
+  {
+    label: 'Expert Call',
+    text: 'This is the expert call step. Schedule a call <a href="https://example.com/call" target="_blank">here</a>.',
+    icon: 4,
+  },
+];
 
 const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
@@ -121,39 +158,10 @@ ColorlibStepIcon.propTypes = {
 export default function Stepperr() {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const steps = [
-    {
-      label: 'Documentation',
-      text: `
-    <Row>
-    <h2 style={{ color: '#083c59', fontWeight: '700', lineHeight: '1.2' }}>Documentation</h2> 
-    <a href="https://www.health.state.mn.us/people/immunize/hcp/admim.pdf" onClick={handleOpen}>Click here for the document</a>
-    </Row>
-  `,
-      icon: 1,
-    },
-    {
-      label: 'Reference Video',
-      text: `
-    <Row>
-    <h2 style={{ color: '#083c59', fontWeight: '700', lineHeight: '1.2' }}>Reference Video</h2> 
-    <a href="https://www.youtube.com/watch?v=YoEWudfhtsk" onClick={handleOpen}>Click here to watch the video</a>
-    </Row>
-  `,
-      icon: 2,
-    },
-    {
-      label: 'Chat',
-      text: 'This is the chat step. Start a chat <a href="https://example.com/chat" target="_blank">here</a>.',
-      icon: 3,
-    },
-    {
-      label: 'Expert Call',
-      text: 'This is the expert call step. Schedule a call <a href="https://example.com/call" target="_blank">here</a>.',
-      icon: 4,
-    },
-  ];
+ 
 
 
 
@@ -216,95 +224,52 @@ export default function Stepperr() {
   // const buttonClasses = useStyles();
 
   return (
-    <Box sx={{ width: '100%', alignSelf: "center" }} className="mx-4 px-4" >
-      <Row>
-        <h1
-          className="text-center p-4"
-          style={{ color: '#083c59', fontWeight: '700', lineHeight: '1.2' }}
-        >
-          References
-        </h1>
-      </Row>
-      <Row style={{ alignItems: "center" }}>
-        <Stepper activeStep={activeStep} connector={<ColorlibConnector />} orientation="vertical">
-          {steps.map((step, index) => (
-            <Step key={step.label} completed={completed[index]}>
-              <StepLabel StepIconComponent={ColorlibStepIcon} onClick={handleStep(index)}>
-                {step.label}
-              </StepLabel>
-              <StepContent>
-
-                <Typography dangerouslySetInnerHTML={{ __html: steps[activeStep].text }} />
-
-
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
-                  <div >
-
-                    {/* <Button
-                    variant="outlined"
-                      disabled={index === 0}
-                      onClick={handleBack}
-                      sx={{ mt: 1, mr: 1 }}
-                      startIcon={<ArrowBackIcon/>}
-                    >
-                      Previous Reference
-                    </Button> */}
-                    <Button
-                      variant="outlined"
-                      onClick={handleNext}
-                      sx={{ mt: 1, mr: 1 }}
-                      startIcon={<ArrowForwardIcon />}
-                      style={{ fontWeight: "bold" }}
-                    >
-                      {index === steps.length - 1 ? 'Help' : 'Need more guidance'}
-                    </Button>
-                    <Button startIcon={<SentimentSatisfiedAltIcon />} onClick={completedSteps} sx={{ mt: 1, mr: 1, '&:hover': { color: '#388e3c' } }} style={{ fontWeight: "bold" }} variant="outlined" color="success">
-                      I'm Satisfied
-                    </Button>
-                  </div>
-                </Box>
-
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-      </Row>
-      {/* <Row>
-        <Stack direction="row" spacing={2}>
-          <Box
-            sx={{
-              width: '100%',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease',
-              '&:hover': {
-                backgroundColor: '#f5f5f5',
-              },
-              height: '300px', // Set your desired height here
-            }}
+    <Box sx={{ display: 'flex' }}>
+      <Sidebar />
+      <Box style={{  width: '100%', alignSelf: "center", marginTop: '64px' }}>
+        <Row className="mx-4 px-4">
+          <h1
+            className="text-center p-4"
+            style={{ color: '#083c59', fontWeight: '700', lineHeight: '1.2' }}
           >
-            <Typography dangerouslySetInnerHTML={{ __html: steps[activeStep].text }} />
-            <Box sx={{ mt: 'auto', display: 'flex', justifyContent: 'flex-end' }}>
-              <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-                {activeStep !== 0 && 'Previous Reference'}
-              </Button>
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
-                {activeStep !== steps.length - 1 && 'Need more guidance'}
-              </Button>
-              <Button onClick={completedSteps} sx={{ backgroundColor: '#4caf50', color: '#fff', '&:hover': { backgroundColor: '#45a049' } }}>
-                I understood
-              </Button>
-            </Box>
+            References
+          </h1>
+        </Row>
+        <Row style={{ alignItems: "center" }} className="mx-4 px-4">
+          <Stepper activeStep={activeStep} connector={<ColorlibConnector />} orientation="vertical">
+            {steps.map((step, index) => (
+              <Step key={step.label} completed={completed[index]}>
+                <StepLabel StepIconComponent={ColorlibStepIcon} onClick={handleStep(index)}>
+                  {step.label}
+                </StepLabel>
+                <StepContent>
 
-          </Box>
+                  <Typography dangerouslySetInnerHTML={{ __html: steps[activeStep].text }} />
 
-        </Stack>
-      </Row> */}
+
+                  <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+                    <div >
+                      <Button
+                        variant="outlined"
+                        onClick={handleNext}
+                        sx={{ mt: 1, mr: 1 }}
+                        startIcon={<ArrowForwardIcon />}
+                        style={{ fontWeight: "bold" }}
+                      >
+                        {index === steps.length - 1 ? 'Help' : 'Need more guidance'}
+                      </Button>
+                      <Button startIcon={<SentimentSatisfiedAltIcon />} onClick={completedSteps} sx={{ mt: 1, mr: 1, '&:hover': { color: '#388e3c' } }} style={{ fontWeight: "bold" }} variant="outlined" color="success">
+                        I'm Satisfied
+                      </Button>
+                    </div>
+                  </Box>
+
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        </Row>
+      </Box>
     </Box>
   );
 }

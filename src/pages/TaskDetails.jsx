@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Card } from 'react-bootstrap';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import SideBar from '../components/Sidebar/SideBar';
 
 const TaskDetails = () => {
   const { id } = useParams();
@@ -26,46 +28,52 @@ const TaskDetails = () => {
   };
 
   return (
-    <Container fluid>
-      <h2 className="text-center mb-4">Task Details</h2>
-      <Row>
-        <Col>
-          <h3>{taskDetails.title}</h3>
-          <p>Description: {taskDetails.description}</p>
+    <Box sx={{ display: 'flex' }}>
+      <SideBar />
+      <Box component="main" style={{ width: '100%', alignSelf: "center", marginTop: '64px' }} sx={{ flexGrow: 1, p: 3 }}>
 
-          <Card className="mb-3" >
-            <Card.Body >
-              <Card.Title onClick={toggleExpand}>Task Checklist</Card.Title>
+        <Container fluid>
+          <h2 className="text-center mb-4">Task Details</h2>
+          <Row>
+            <Col>
+              <h3>{taskDetails.title}</h3>
+              <p>Description: {taskDetails.description}</p>
 
-              {expand && (
-                <>
-                  <Form.Check label="Checkbox 1" />
-                  <Form.Check label="Checkbox 2" />
-                  <Form.Check label="Checkbox a3" />
-                  <Form.Check label="Checkbox 4" />
-                  <Form.Check label="Checkbox 5" />
-                  <Form.Check label="Checkbox 6" />
-                  <Form.Check label="acknowledge" />
-                </>
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <Row className="justify-content-end">
-        <Col xs="auto">
-          <Link to="/Stepperr">
-            <Button variant="outlined" sx={{ mt: 1, mr: 1, '&:hover': { color: '#blue' } }} style={{ width: "200px",fontWeight:"bold" }}>Need Help</Button>
-            <Button style={{ width: "200px",fontWeight:"bold" }} sx={{ mt: 1, mr: 1, '&:hover': { color: '#388e3c' } }} variant="outlined" color="success">
-              Save
-            </Button>
-          </Link>
-          <Link to="/tasks">
-          <Button variant="outlined" color="error" style={{ width: "200px",fontWeight:"bold" }} sx={{ mt: 1, mr: 1, '&:hover': { color: 'red' } }}>Cancel</Button>
-          </Link>
-        </Col>
-      </Row>
-    </Container>
+              <Card className="mb-3" >
+                <Card.Body >
+                  <Card.Title onClick={toggleExpand}>Task Checklist</Card.Title>
+
+                  {expand && (
+                    <>
+                      <Form.Check label="Checkbox 1" />
+                      <Form.Check label="Checkbox 2" />
+                      <Form.Check label="Checkbox a3" />
+                      <Form.Check label="Checkbox 4" />
+                      <Form.Check label="Checkbox 5" />
+                      <Form.Check label="Checkbox 6" />
+                      <Form.Check label="acknowledge" />
+                    </>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+          <Row className="justify-content-end">
+            <Col xs="auto">
+              <Link to="/Stepperr">
+                <Button variant="outlined" sx={{ mt: 1, mr: 1, '&:hover': { color: '#blue' } }} style={{ width: "200px", fontWeight: "bold" }}>Need Help</Button>
+                <Button style={{ width: "200px", fontWeight: "bold" }} sx={{ mt: 1, mr: 1, '&:hover': { color: '#388e3c' } }} variant="outlined" color="success">
+                  Save
+                </Button>
+              </Link>
+              <Link to="/tasks">
+                <Button variant="outlined" color="error" style={{ width: "200px", fontWeight: "bold" }} sx={{ mt: 1, mr: 1, '&:hover': { color: 'red' } }}>Cancel</Button>
+              </Link>
+            </Col>
+          </Row>
+        </Container>
+      </Box>
+    </Box>
   );
 };
 
